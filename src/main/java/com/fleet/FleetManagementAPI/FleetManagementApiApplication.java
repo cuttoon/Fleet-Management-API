@@ -9,7 +9,6 @@ import java.util.List;
 
 // Agregar la anotación RestController para consultar información, ahora se volvio un constrolador
 @SpringBootApplication
-@RestController
 public class FleetManagementApiApplication {
 
 	public static void main(String[] args) {
@@ -17,11 +16,11 @@ public class FleetManagementApiApplication {
 	}
 
     // crear metodo, retornando una lista con información
-    @GetMapping(path = "/")
+    /* @GetMapping(path = "/")
     public List<String> getTaxis(){
         return List.of(
                 "Karen",
                 "Huamán"
                 );
-    }
+    } */
 }
