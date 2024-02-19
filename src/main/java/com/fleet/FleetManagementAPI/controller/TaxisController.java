@@ -2,6 +2,9 @@ package com.fleet.FleetManagementAPI.controller;
 
 import com.fleet.FleetManagementAPI.model.Taxis;
 import com.fleet.FleetManagementAPI.service.TaxisService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,7 @@ import java.util.List;
 @RequestMapping(path = "/taxis")
 public class TaxisController {
 
+    // inyección para el controlador
     private TaxisService taxisService;
 
     @Autowired
@@ -21,9 +25,10 @@ public class TaxisController {
         this.taxisService = taxisService;
     }
 
-    @GetMapping(path = "listar")
-    public List<Taxis> getTaxis(){
-        return this.taxisService.getTaxis();
+    @GetMapping(path = "/listar")
+    public Page<Taxis> getTaxis(@PageableDefault(size = 20) Pageable pageable){
+
+        return this.taxisService.getTaxis(pageable);
     }
 
     /*@GetMapping(path = "/listar")

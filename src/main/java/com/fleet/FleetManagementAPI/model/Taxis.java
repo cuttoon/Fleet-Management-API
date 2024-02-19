@@ -16,8 +16,8 @@ public class Taxis {
     @Column
     private String plate;
 
-    @OneToMany(mappedBy = "taxis")
-    private Collection<Trajectories> itemsTrajectories = new ArrayList<>();
+    /* @OneToMany(mappedBy = "taxis")
+    private Collection<Trajectories> itemsTrajectories = new ArrayList<>(); */
 
     public Taxis() {
     }
@@ -43,11 +43,11 @@ public class Taxis {
         this.plate = plate;
     }
 
-    public Collection<Trajectories> getItemsTrajectories() {
+   /* public Collection<Trajectories> getItemsTrajectories() {
         return itemsTrajectories;
     }
 
     public void setItemsTrajectories(Collection<Trajectories> itemsTrajectories) {
         this.itemsTrajectories = itemsTrajectories;
-    }
+    } */
 }
