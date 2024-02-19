@@ -15,8 +15,9 @@ public class Trajectories implements Serializable {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    private Integer taxi_id;
+    @ManyToOne
+    @JoinColumn(name = "taxi_id", nullable = false)
+    private Taxis taxis;
 
     @Column
     private LocalDate date;
@@ -27,19 +28,14 @@ public class Trajectories implements Serializable {
     @Column
     private float longitude;
 
-    @ManyToOne
-    @JoinColumn(name = "taxi_id", nullable = false)
-    private Taxis taxis;
-
     public Trajectories() {
     }
 
-    public Trajectories(Integer taxi_id, LocalDate date, float latitude, float longitude, Taxis taxis) {
-        this.taxi_id = taxi_id;
+    public Trajectories(Taxis taxis, LocalDate date, float latitude, float longitude) {
+        this.taxis = taxis;
         this.date = date;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.taxis = taxis;
     }
 
     public Integer getId() {
@@ -50,12 +46,12 @@ public class Trajectories implements Serializable {
         this.id = id;
     }
 
-    public Integer getTaxi_id() {
-        return taxi_id;
+    public Taxis getTaxis() {
+        return taxis;
     }
 
-    public void setTaxi_id(Integer taxi_id) {
-        this.taxi_id = taxi_id;
+    public void setTaxis(Taxis taxis) {
+        this.taxis = taxis;
     }
 
     public LocalDate getDate() {
@@ -80,13 +76,5 @@ public class Trajectories implements Serializable {
 
     public void setLongitude(float longitude) {
         this.longitude = longitude;
-    }
-
-    public Taxis getTaxis() {
-        return taxis;
-    }
-
-    public void setTaxis(Taxis taxis) {
-        this.taxis = taxis;
     }
 }
