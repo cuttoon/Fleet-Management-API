@@ -1,27 +1,34 @@
 package com.fleet.FleetManagementAPI.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.springframework.context.annotation.Primary;
+
+@Entity
+@Table(name = "taxis")
 public class Taxis {
 
-    private Long id;
+    @Id
+    private Integer id;
+
+    @Column
     private String plate;
 
     public Taxis() {
     }
 
-    public Taxis(Long id, String plate) {
+    public Taxis(Integer id, String plate) {
         this.id = id;
         this.plate = plate;
     }
 
-    public Taxis(String plate) {
-        this.plate = plate;
-    }
-
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

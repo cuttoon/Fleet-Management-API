@@ -23,4 +23,9 @@ public class FleetManagementApiApplication {
                 "Huamán"
                 );
     } */
+
+	/*
+	* @SpringBootConfigurationindicates that the class has @Bean definition methods.
+	* So Spring container can process the class and generate Spring Beans to be used in the application.
+	* */
 }
