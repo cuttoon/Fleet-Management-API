@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,9 +27,17 @@ public class TaxisController {
     }
 
     @GetMapping(path = "/listar")
-    public Page<Taxis> getTaxis(@PageableDefault(size = 20) Pageable pageable){
+    public ResponseEntity<?> getTaxis(@PageableDefault(size = 20) Pageable pageable){
 
-        return this.taxisService.getTaxis(pageable);
+        // return this.taxisService.getTaxis(pageable);
+
+        Page<Taxis> page = this.taxisService.getTaxis(pageable);
+
+        if(page.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(page.getContent(), HttpStatus.OK);
+        }
     }
 
     /*@GetMapping(path = "/listar")
