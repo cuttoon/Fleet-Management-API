@@ -19,6 +19,7 @@ public class Taxis {
     /* @OneToMany(mappedBy = "taxis")
     private Collection<Trajectories> itemsTrajectories = new ArrayList<>(); */
 
+
     public Taxis() {
     }
 
