@@ -6,6 +6,7 @@ import com.fleet.FleetManagementAPI.service.TaxisService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,8 @@ public class TaxisController {
     @GetMapping(path = "/listar")
     public ResponseEntity<?> getTaxis(){
 
-        final Pageable pageable = PageRequest.of(0, 10);
+        final Pageable pageable = PageRequest.of(0, 10,
+                Sort.by(Sort.Direction.ASC, "plate"));
 
         // return this.taxisService.getTaxis(pageable);
 
