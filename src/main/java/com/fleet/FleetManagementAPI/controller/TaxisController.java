@@ -33,10 +33,10 @@ public class TaxisController {
     }
 
     @GetMapping(path = "/listar")
-    public ResponseEntity<?> getTaxis(){
+    public ResponseEntity<?> getTaxis(@PageableDefault(page = 0, size = 10) Pageable pageable){
 
-        final Pageable pageable = PageRequest.of(0, 10,
-                Sort.by(Sort.Direction.ASC, "plate"));
+        /* final Pageable pageable = PageRequest.of(0, 10,
+                Sort.by(Sort.Direction.ASC, "plate")); */
 
         // return this.taxisService.getTaxis(pageable);
 

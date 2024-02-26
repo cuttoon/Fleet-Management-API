@@ -1,6 +1,7 @@
 package com.fleet.FleetManagementAPI.model;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.security.Timestamp;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Trajectories {
     private Taxis taxis;
 
     @Column
+    @DateTimeFormat(pattern="yyyy-MM-dd", iso= DateTimeFormat.ISO.DATE)
     private LocalDateTime date;
 
     @Column
@@ -76,4 +78,6 @@ public class Trajectories {
     public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
+
+
 }
