@@ -11,5 +11,5 @@ import java.util.Date;
 public interface TrajectoriesInterface {
 
     // le borre el public abstract
-    Page<Trajectories> findByTaxiAndDate(Integer taxiId, LocalDate  date, Pageable pageable);
+    Page<Trajectories> findByTaxiAndDate(Integer taxiId, LocalDateTime  date, Pageable pageable);
 }

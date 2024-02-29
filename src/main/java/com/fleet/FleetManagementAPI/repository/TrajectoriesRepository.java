@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface TrajectoriesRepository extends JpaRepository<Trajectories, Integer> {
 
-    Page<Trajectories> findByTaxisAndDate(Integer id, LocalDate date, Pageable pageable);
+    Page<Trajectories> findByTaxisAndDate(Integer id, LocalDateTime date, Pageable pageable);
 }
 
 

@@ -48,7 +48,7 @@ public class TrajectoriesController {
     @GetMapping("/listar")
     public ResponseEntity<Page<Trajectories>> getUbication(
             @RequestParam Integer taxiId,
-            @RequestParam LocalDate date,
+            @RequestParam  @DateTimeFormat(pattern = "yyy-MM-dd") LocalDateTime date,
             Pageable pageable) {
         Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDate(taxiId, date, pageable);
         // return new ResponseEntity<>(trajectories, HttpStatus.OK);
