@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.security.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "trajectories")
@@ -16,18 +17,17 @@ public class Trajectories {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="taxi_id", nullable = false)
+    @JoinColumn(name="taxi_id", nullable = false, referencedColumnName = "id")
     private Taxis taxis;
 
-    @Column
-    @DateTimeFormat(pattern="yyyy-MM-dd", iso= DateTimeFormat.ISO.DATE)
+    @Column(name = "date")
     private LocalDateTime date;
 
-    @Column
-    private float latitude;
+    @Column(name = "latitude")
+    private Float latitude;
 
-    @Column
-    private float longitude;
+    @Column(name = "longitude")
+    private Float longitude;
 
     public Trajectories() {
     }

@@ -33,6 +33,7 @@ public class TaxisService implements TaxisInterface{
         return taxisRepository.findById(id).orElse(null);
     }
 
+
     @Override
     @Transactional(readOnly=true)
     public Page<Taxis> findAll(Pageable pageable) {

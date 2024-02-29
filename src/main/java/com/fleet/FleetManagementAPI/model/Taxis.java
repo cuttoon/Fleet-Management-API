@@ -1,10 +1,8 @@
 package com.fleet.FleetManagementAPI.model;
 
 import jakarta.persistence.*;
-import org.springframework.context.annotation.Primary;
-
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "taxis")
@@ -13,11 +11,11 @@ public class Taxis {
     @Id
     private Integer id;
 
-    @Column
+    @Column(name = "plate")
     private String plate;
 
     @OneToMany(mappedBy = "taxis")
-    private Collection<Trajectories> itemsTrajectories = new ArrayList<>();
+    private List<Trajectories> itemsTrajectories;
 
 
     public Taxis() {
@@ -48,7 +46,7 @@ public class Taxis {
         return itemsTrajectories;
     }
 
-    public void setItemsTrajectories(Collection<Trajectories> itemsTrajectories) {
+    public void setItemsTrajectories(List<Trajectories> itemsTrajectories) {
         this.itemsTrajectories = itemsTrajectories;
     }
 }

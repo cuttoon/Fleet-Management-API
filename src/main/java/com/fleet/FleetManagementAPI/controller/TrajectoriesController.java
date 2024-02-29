@@ -13,7 +13,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -28,12 +30,27 @@ public class TrajectoriesController {
 
 
     // /listar/{id}/date/{date}
-    @GetMapping("/listar")
+    /* @GetMapping("/listar")
     public ResponseEntity<?> getUbication(
             @RequestParam Integer id,
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime date,
             Pageable pageable) {
         Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDate(id, date, pageable);
+        // return new ResponseEntity<>(trajectories, HttpStatus.OK);
+
+        if(trajectories.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(trajectories, HttpStatus.OK);
+        }
+    } */
+
+    @GetMapping("/listar")
+    public ResponseEntity<Page<Trajectories>> getUbication(
+            @RequestParam Integer taxiId,
+            @RequestParam LocalDate date,
+            Pageable pageable) {
+        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDate(taxiId, date, pageable);
         // return new ResponseEntity<>(trajectories, HttpStatus.OK);
 
         if(trajectories.isEmpty()){

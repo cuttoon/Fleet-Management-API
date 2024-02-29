@@ -6,8 +6,10 @@ import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public interface TrajectoriesInterface {
 
-    public abstract Page<Trajectories> findByTaxiAndDate(Integer id, LocalDateTime date, Pageable pageable);
+    // le borre el public abstract
+    Page<Trajectories> findByTaxiAndDate(Integer taxiId, LocalDate  date, Pageable pageable);
 }

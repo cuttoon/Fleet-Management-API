@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,8 +20,7 @@ public class TrajectoriesService implements TrajectoriesInterface{
     private TrajectoriesRepository trajectoriesRepository;
 
     @Override
-    @Transactional(readOnly=true)
-    public Page<Trajectories> findByTaxiAndDate(Integer id, LocalDateTime date, Pageable pageable) {
-        return trajectoriesRepository.findByTaxisAndDate(id, date, pageable);
+    public Page<Trajectories> findByTaxiAndDate(Integer taxiId, LocalDate date, Pageable pageable) {
+        return trajectoriesRepository.findByTaxisAndDate(taxiId, date, pageable);
     }
 }
