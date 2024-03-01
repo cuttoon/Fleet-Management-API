@@ -1,6 +1,10 @@
 package com.fleet.FleetManagementAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,8 +18,9 @@ public class Taxis {
     @Column(name = "plate")
     private String plate;
 
+
     @OneToMany(mappedBy = "taxis")
-    private List<Trajectories> itemsTrajectories;
+    private Collection<Trajectories> itemsTrajectories = new ArrayList<>();
 
 
     public Taxis() {

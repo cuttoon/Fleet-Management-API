@@ -1,5 +1,6 @@
 package com.fleet.FleetManagementAPI.service;
 
+import com.fleet.FleetManagementAPI.model.Taxis;
 import com.fleet.FleetManagementAPI.model.Trajectories;
 import com.fleet.FleetManagementAPI.repository.TrajectoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,12 @@ public class TrajectoriesService implements TrajectoriesInterface{
     private TrajectoriesRepository trajectoriesRepository;
 
     @Override
-    public Page<Trajectories> findByTaxiAndDate(Integer taxiId, LocalDateTime date, Pageable pageable) {
-        return trajectoriesRepository.findByTaxisAndDate(taxiId, date, pageable);
+    public Page<Trajectories> findByTaxiAndDates(Integer taxiId) {
+        return trajectoriesRepository.findByTaxisAndDate(taxiId);
+    }
+
+    @Override
+    public Page<Trajectories> findAll(Pageable pageable) {
+        return trajectoriesRepository.findAll(pageable);
     }
 }

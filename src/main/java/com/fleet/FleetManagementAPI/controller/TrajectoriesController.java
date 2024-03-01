@@ -1,5 +1,6 @@
 package com.fleet.FleetManagementAPI.controller;
 
+import com.fleet.FleetManagementAPI.model.Taxis;
 import com.fleet.FleetManagementAPI.model.Trajectories;
 import com.fleet.FleetManagementAPI.repository.TaxisRepository;
 import com.fleet.FleetManagementAPI.repository.TrajectoriesRepository;
@@ -8,6 +9,7 @@ import com.fleet.FleetManagementAPI.service.TrajectoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -30,27 +33,25 @@ public class TrajectoriesController {
 
 
     // /listar/{id}/date/{date}
-    /* @GetMapping("/listar")
-    public ResponseEntity<?> getUbication(
-            @RequestParam Integer id,
-            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime date,
-            Pageable pageable) {
-        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDate(id, date, pageable);
-        // return new ResponseEntity<>(trajectories, HttpStatus.OK);
 
-        if(trajectories.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }else{
-            return new ResponseEntity<>(trajectories, HttpStatus.OK);
-        }
-    } */
 
-    @GetMapping("/listar")
+    @GetMapping(path = "/listar")
     public ResponseEntity<Page<Trajectories>> getUbication(
             @RequestParam Integer taxiId,
-            @RequestParam  @DateTimeFormat(pattern = "yyy-MM-dd") LocalDateTime date,
             Pageable pageable) {
-        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDate(taxiId, date, pageable);
+
+        // return "hola";
+
+        String fechaCadena = "2024-02-28T12:30:00";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+        // Parsear la cadena a LocalDateTime
+        LocalDateTime fechaYHora = LocalDateTime.parse(fechaCadena, formatter);
+        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDates(taxiId);
+
+
+        // Time timestamp = Timestamp.valueOf(startOfDay);
         // return new ResponseEntity<>(trajectories, HttpStatus.OK);
 
         if(trajectories.isEmpty()){

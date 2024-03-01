@@ -1,5 +1,6 @@
 package com.fleet.FleetManagementAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+@NamedQuery(name = "Trajectories.findByTaxisAndDate", query = "select a from Trajectories a where a.taxis=:taxiId")
 @Entity
 @Table(name = "trajectories")
 public class Trajectories {
@@ -16,6 +18,7 @@ public class Trajectories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnoreProperties(value = "itemsTrajectories")
     @ManyToOne
     @JoinColumn(name="taxi_id", nullable = false, referencedColumnName = "id")
     private Taxis taxis;
@@ -30,6 +33,14 @@ public class Trajectories {
     private Float longitude;
 
     public Trajectories() {
+    }
+
+    public Trajectories(Integer id, Taxis taxis, LocalDateTime date, Float latitude, Float longitude) {
+        this.id = id;
+        this.taxis = taxis;
+        this.date = date;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public Trajectories(Taxis taxis, LocalDateTime date, float latitude, float longitude) {
