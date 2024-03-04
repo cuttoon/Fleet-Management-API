@@ -12,7 +12,7 @@ import java.util.Date;
 public interface TrajectoriesInterface {
 
     // le borre el public abstract
-    public abstract Page<Trajectories> findByTaxiAndDates(Integer taxiId);
+    public abstract Page<Trajectories> findByTaxiAndDates(Integer taxiId, Pageable pageable);
 
     public abstract Page<Trajectories> findAll(Pageable pageable);
 }

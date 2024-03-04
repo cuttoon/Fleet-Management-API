@@ -21,8 +21,8 @@ public class TrajectoriesService implements TrajectoriesInterface{
     private TrajectoriesRepository trajectoriesRepository;
 
     @Override
-    public Page<Trajectories> findByTaxiAndDates(Integer taxiId) {
-        return trajectoriesRepository.findByTaxisAndDate(taxiId);
+    public Page<Trajectories> findByTaxiAndDates(Integer taxiId,  Pageable pageable) {
+        return trajectoriesRepository.findByTaxisAndDate(taxiId, pageable);
     }
 
     @Override

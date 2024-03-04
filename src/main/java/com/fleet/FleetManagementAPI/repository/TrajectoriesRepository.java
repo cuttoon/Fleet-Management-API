@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +18,8 @@ import java.util.List;
 @Repository
 public interface TrajectoriesRepository extends JpaRepository<Trajectories, Integer> {
 
-    Page<Trajectories> findByTaxisAndDate(@Param("taxiId") Integer taxiId);
+    @Query("SELECT t FROM Trajectories t WHERE t.taxis.id = :taxiId")
+    Page<Trajectories> findByTaxisAndDate(@RequestParam("taxiId") Integer taxiId, Pageable pageable);
 }
 
 

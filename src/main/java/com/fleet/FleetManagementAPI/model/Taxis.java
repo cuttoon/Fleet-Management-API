@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -18,8 +19,8 @@ public class Taxis {
     @Column(name = "plate")
     private String plate;
 
-
-    @OneToMany(mappedBy = "taxis")
+    @JsonIgnore
+    @OneToMany(mappedBy = "taxis", cascade = CascadeType.ALL)
     private Collection<Trajectories> itemsTrajectories = new ArrayList<>();
 
 

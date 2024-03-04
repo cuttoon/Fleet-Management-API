@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.security.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -12,15 +13,15 @@ import java.util.Date;
 @NamedQuery(name = "Trajectories.findByTaxisAndDate", query = "select a from Trajectories a where a.taxis=:taxiId")
 @Entity
 @Table(name = "trajectories")
-public class Trajectories {
+public class Trajectories implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonIgnoreProperties(value = "itemsTrajectories")
+
     @ManyToOne
-    @JoinColumn(name="taxi_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name="taxi_id", nullable = false)
     private Taxis taxis;
 
     @Column(name = "date")

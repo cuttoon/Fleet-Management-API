@@ -32,27 +32,15 @@ public class TrajectoriesController {
     }
 
 
-    // /listar/{id}/date/{date}
-
-
     @GetMapping(path = "/listar")
     public ResponseEntity<Page<Trajectories>> getUbication(
             @RequestParam Integer taxiId,
             Pageable pageable) {
 
-        // return "hola";
 
-        String fechaCadena = "2024-02-28T12:30:00";
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-
-        // Parsear la cadena a LocalDateTime
-        LocalDateTime fechaYHora = LocalDateTime.parse(fechaCadena, formatter);
-        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDates(taxiId);
+        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDates(taxiId, pageable);
 
 
-        // Time timestamp = Timestamp.valueOf(startOfDay);
-        // return new ResponseEntity<>(trajectories, HttpStatus.OK);
 
         if(trajectories.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
