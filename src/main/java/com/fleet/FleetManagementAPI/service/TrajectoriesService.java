@@ -21,12 +21,17 @@ public class TrajectoriesService implements TrajectoriesInterface{
     private TrajectoriesRepository trajectoriesRepository;
 
     @Override
-    public Page<Trajectories> findByTaxiAndDates(Integer taxiId,  Pageable pageable) {
-        return trajectoriesRepository.findByTaxisAndDate(taxiId, pageable);
+    public Page<Trajectories> findByTaxiAndDates(Integer taxiId,  String date, Pageable pageable) {
+        return trajectoriesRepository.findByTaxisAndDate(taxiId, date, pageable);
     }
 
     @Override
     public Page<Trajectories> findAll(Pageable pageable) {
         return trajectoriesRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Trajectories> findByLastUbications(Integer taxiId, Pageable pageable) {
+        return trajectoriesRepository.findByLastUbication(taxiId, pageable);
     }
 }

@@ -32,15 +32,27 @@ public class TrajectoriesController {
     }
 
 
-    @GetMapping(path = "/listar")
-    public ResponseEntity<Page<Trajectories>> getUbication(
+    @GetMapping(path = "/findByIdandDate")
+    public ResponseEntity<Page<Trajectories>> getTrajectories(
+            @RequestParam Integer taxiId,
+            @RequestParam String date,
+            Pageable pageable) {
+
+        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDates(taxiId, date, pageable);
+
+        if(trajectories.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }else{
+            return new ResponseEntity<>(trajectories, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/lastUbication")
+    public ResponseEntity<Page<Trajectories>> getLastUbication(
             @RequestParam Integer taxiId,
             Pageable pageable) {
 
-
-        Page<Trajectories> trajectories = trajectoriesService.findByTaxiAndDates(taxiId, pageable);
-
-
+        Page<Trajectories> trajectories = trajectoriesService.findByLastUbications(taxiId, pageable);
 
         if(trajectories.isEmpty()){
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);

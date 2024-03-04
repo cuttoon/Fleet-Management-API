@@ -18,8 +18,12 @@ import java.util.List;
 @Repository
 public interface TrajectoriesRepository extends JpaRepository<Trajectories, Integer> {
 
-    @Query("SELECT t FROM Trajectories t WHERE t.taxis.id = :taxiId")
-    Page<Trajectories> findByTaxisAndDate(@RequestParam("taxiId") Integer taxiId, Pageable pageable);
+    // @Query("SELECT t FROM Trajectories t WHERE t.taxis.id = :taxiId")
+    @Query("SELECT t FROM Trajectories t WHERE t.taxis.id = ?1 AND TO_CHAR(t.date, 'dd-MM-yyyy') = ?2")
+    Page<Trajectories> findByTaxisAndDate(@RequestParam("taxiId") Integer taxiId, @RequestParam("date") String date, Pageable pageable);
+
+    @Query("SELECT t FROM Trajectories t WHERE t.taxis.id = :taxiId AND (t.taxis.id, t.date) IN (SELECT t2.taxis.id, MAX(t2.date) FROM Trajectories t2 WHERE t2.taxis.id = :taxiId GROUP BY t2.taxis.id)")
+    Page<Trajectories> findByLastUbication(@RequestParam("taxiId") Integer taxiId, Pageable pageable);
 }
 
 
