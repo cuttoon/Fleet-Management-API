@@ -21,7 +21,6 @@ class FleetManagementApiApplicationTests {
 	@Test
 	@DisplayName("Probando el primer endpoint")
 	void contextLoads() {
-		// fackear la bd o mockearlo
 
 	}
 
