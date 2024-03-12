@@ -31,7 +31,7 @@ public class TrajectoriesService implements TrajectoriesInterface{
     }
 
     @Override
-    public Page<Trajectories> findByLastUbications(Integer taxiId, Pageable pageable) {
-        return trajectoriesRepository.findByLastUbication(taxiId, pageable);
+    public Page<Trajectories> findByLastUbications(Pageable pageable) {
+        return trajectoriesRepository.findByLastUbication(pageable);
     }
 }

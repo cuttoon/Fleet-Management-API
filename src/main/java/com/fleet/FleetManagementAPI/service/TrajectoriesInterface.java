@@ -16,5 +16,5 @@ public interface TrajectoriesInterface {
 
     public abstract Page<Trajectories> findAll(Pageable pageable);
 
-    public abstract Page<Trajectories> findByLastUbications(Integer taxiId, Pageable pageable);
+    public abstract Page<Trajectories> findByLastUbications(Pageable pageable);
 }
