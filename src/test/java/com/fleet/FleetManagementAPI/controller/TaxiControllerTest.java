@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(TaxisController.class)
 @AutoConfigureMockMvc
-public class TaxiControllerTest {
+class TaxiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

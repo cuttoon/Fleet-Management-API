@@ -35,11 +35,6 @@ public class TaxisController {
     @GetMapping(path = "/listar")
     public ResponseEntity<?> getTaxis(@PageableDefault(page = 0, size = 10) Pageable pageable){
 
-        /* final Pageable pageable = PageRequest.of(0, 10,
-                Sort.by(Sort.Direction.ASC, "plate")); */
-
-        // return this.taxisService.getTaxis(pageable);
-
         Page<Taxis> collection = taxisService.findAll(pageable);
 
         if(collection.isEmpty()){
@@ -48,14 +43,4 @@ public class TaxisController {
             return new ResponseEntity<>(collection, HttpStatus.OK);
         }
     }
-
-    /*@GetMapping(path = "/listar")
-    public List<Taxis> getTaxis(){
-        return List.of(
-                new Taxis(
-                        2541L,
-                        "platenumber"
-                )
-        );
-    }*/
 }
