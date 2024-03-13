@@ -53,20 +53,18 @@ class TrajectoriesControllerTest {
 
         Taxis taxi = new Taxis(1, "ABC123");
 
-        // Datos de ejemplo para Trajectories
         Trajectories trajectory = new Trajectories(1, taxi, LocalDateTime.now(), 1542646f, 145262565f);
 
         // Se crea una lista de trajecorias
         List<Trajectories> trajectoriesList = Collections.singletonList(trajectory);
 
-        // Se crea una página con la lista de trajecorias
         Page<Trajectories> trajectoriesPage = new PageImpl<>(trajectoriesList);
 
-        // Configuración del comportamiento del servicio
+        // Mockeando del comportamiento del servicio
         Mockito.when(trajectoriesService.findByTaxiAndDates(Mockito.anyInt(), Mockito.anyString(),
                 Mockito.any(Pageable.class))).thenReturn(trajectoriesPage);
 
-        // Realizar la solicitud GET utilizando MockMvc
+        // -> solicitud GET utilizando mockMvc
         mockMvc.perform(MockMvcRequestBuilders.get("/trajectories/findByIdandDate")
                         .param("taxiId", String.valueOf(taxi.getId()))
                         .param("date", trajectory.getDate().toString())
@@ -81,7 +79,7 @@ class TrajectoriesControllerTest {
     @Test
     void getLastUbication() throws Exception {
 
-        // Datos de ejemplo, creación de elemento Trajectories
+        // Datos de ejemplo
         Trajectories trajectory = new Trajectories();
         trajectory.setId(1);
         trajectory.setTaxis(new Taxis(6418, "ABC123"));
@@ -91,10 +89,9 @@ class TrajectoriesControllerTest {
 
         // Se crea una lista de elementos de tipo Trajectories
         List<Trajectories> trajectoryList = Collections.singletonList(trajectory);
-        // Se crea una página con la lista de trajectories
+
         Page<Trajectories> trajectoryPage = new PageImpl<>(trajectoryList);
 
-        // Se hace un mock del servicio de trajectories para que retorne la página creada
         Mockito.when(trajectoriesService.findByLastUbications(
                 Mockito.eq(PageRequest.of(0, 1)))).thenReturn(trajectoryPage);
 
