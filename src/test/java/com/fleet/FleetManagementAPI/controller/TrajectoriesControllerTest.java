@@ -78,6 +78,26 @@ class TrajectoriesControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id").value(trajectory.getId()));
     }
 
+    @Test
+    void getLastUbication() throws Exception {
 
+        // Datos de ejemplo, creación de elemento Trajectories
+        Trajectories trajectory = new Trajectories();
+        trajectory.setId(1);
+        trajectory.setTaxis(new Taxis(6418, "ABC123"));
+        trajectory.setDate(LocalDateTime.now());
+        trajectory.setLatitude(1542646f);
+        trajectory.setLongitude(145262565f);
+
+        // Se crea una lista de elementos de tipo Trajectories
+        List<Trajectories> trajectoryList = Collections.singletonList(trajectory);
+        // Se crea una página con la lista de trajectories
+        Page<Trajectories> trajectoryPage = new PageImpl<>(trajectoryList);
+
+        // Se hace un mock del servicio de trajectories para que retorne la página creada
+        Mockito.when(trajectoriesService.findByLastUbications(
+                Mockito.eq(PageRequest.of(0, 1)))).thenReturn(trajectoryPage);
+
+    }
 }
 
