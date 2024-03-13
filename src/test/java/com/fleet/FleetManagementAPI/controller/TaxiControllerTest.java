@@ -4,6 +4,7 @@ import com.fleet.FleetManagementAPI.model.Taxis;
 import com.fleet.FleetManagementAPI.service.TaxisService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -13,9 +14,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import javax.print.attribute.standard.Media;
 import java.util.Collections;
 
 import static org.mockito.Mockito.when;
@@ -32,19 +37,26 @@ class TaxiControllerTest {
     @MockBean
     private TaxisService taxisService;
 
+
     @Test
-    void getTaxis(){
+    void getTaxis() throws Exception {
 
         // mockeando data
         Taxis taxis = new Taxis();
         taxis.setId(7957);
         taxis.setPlate("ABCD");
 
-        Pageable pageable = PageRequest.of(1, 10);
-        Page<Taxis> taxisPage = new PageImpl<>(Collections.emptyList(), pageable, 7957);
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Taxis> taxisPage = new PageImpl<>(Collections.singletonList(taxis), pageable, 1);
 
-        when(taxisService.findAll(pageable)).thenReturn(taxisPage);
+        Mockito.when(taxisService.findAll(pageable)).thenReturn(taxisPage);
 
-        // mockMvc.perform();
+        // mockMvc.perform(); para el GET
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get("/taxis/listar")
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].id").value(7957))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content[0].plate").value("ABCD"));
     }
 }
